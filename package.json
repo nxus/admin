@@ -1,0 +1,43 @@
+{
+  "name": "@nxus/admin-crud",
+  "version": "0.0.1",
+  "description": "Administrative CRUD screens for Nxus applications",
+  "main": "lib/AdminBase.js",
+  "scripts": {
+    "test": "NODE_ENV=test mocha --compilers js:babel/register -R spec",
+    "compile": "babel --optional runtime -d lib/ src/",
+    "prepublish": "npm run compile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nxus/admin-crud.git"
+  },
+  "keywords": [
+    "nxus",
+    "admin",
+    "crud"
+  ],
+  "author": "mjreich",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nxus/admin-crud/issues"
+  },
+  "homepage": "https://github.com/nxus/admin-crud",
+  "dependencies": {
+    "babel-runtime": "^5.7.0"
+  },
+  "peerDependencies": {
+    "@nxus/core": "^2.2.0",
+    "@nxus/router": "^2.2.0",
+    "@nxus/templater": "^2.2.0",
+    "@nxus/storage": "^2.2.2"
+  },
+  "devDependencies": {
+    "@nxus/core": "^2.2.0",
+    "babel": "^5.7.0",
+    "chai": "^3.4.1",
+    "chai-as-promised": "^5.1.0",
+    "mocha": "^2.2.5",
+    "sinon": "^1.17.2"
+  }
+}
