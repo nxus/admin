@@ -2,7 +2,7 @@
 
 import {HasModels} from '@nxus/storage'
 
-export default class Admin extends HasModels {
+class AdminBase extends HasModels {
 
   constructor(app) {
     super(app)
@@ -145,3 +145,9 @@ export default class Admin extends HasModels {
     promise.then((u) => {req.flash('info', this.display_name()+' created');; res.redirect(this.base)})
   }
 }
+
+// Nxus requires modules to provide a module function
+var module = function () {}
+module.AdminBase = AdminBase
+export default module
+

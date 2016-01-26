@@ -1,6 +1,6 @@
 'use strict';
 
-import AdminBase from '../src/AdminBase'
+import {AdminBase} from '../src/AdminBase'
 
 import TestApp from '@nxus/core/lib/test/support/TestApp';
 

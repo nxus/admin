@@ -1,5 +1,5 @@
 {
-  "name": "@nxus/admin-crud",
+  "name": "@nxus/admin",
   "version": "0.0.1",
   "description": "Administrative CRUD screens for Nxus applications",
   "main": "lib/AdminBase.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nxus/admin-crud.git"
+    "url": "https://github.com/nxus/admin.git"
   },
   "keywords": [
     "nxus",
@@ -20,9 +20,9 @@
   "author": "mjreich",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nxus/admin-crud/issues"
+    "url": "https://github.com/nxus/admin/issues"
   },
-  "homepage": "https://github.com/nxus/admin-crud",
+  "homepage": "https://github.com/nxus/admin",
   "dependencies": {
     "babel-runtime": "^5.7.0"
   },
