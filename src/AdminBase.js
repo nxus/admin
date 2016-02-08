@@ -2,7 +2,7 @@
 
 import {HasModels} from '@nxus/storage'
 
-class AdminBase extends HasModels {
+export class AdminBase extends HasModels {
 
   constructor(app) {
     super(app)
@@ -84,7 +84,7 @@ class AdminBase extends HasModels {
       find = find.populate(...this.populate)
     }
     find.then((insts) => {
-      this.templater.request('renderPartial', this.prefix+'-list', 'default', {
+      this.templater.request('renderPartial', this.prefix+'-list', 'page', {
         req,
         base: this.base,
         user: req.user,
@@ -100,7 +100,7 @@ class AdminBase extends HasModels {
       find = find.populate(...this.populate)
     }
     find.then((inst) => {
-      this.templater.request('renderPartial', this.prefix+'-form', 'default', {
+      this.templater.request('renderPartial', this.prefix+'-form', 'page', {
         req,
         base: this.base,
         user: req.user,
@@ -114,7 +114,7 @@ class AdminBase extends HasModels {
     let inst = {}
     if(this.populate && this.populate.length > 0) 
       for (let pop of this.populate) inst[pop] = {}
-    this.templater.request('renderPartial', this.prefix+'-form', 'default', {
+    this.templater.request('renderPartial', this.prefix+'-form', 'page', {
       req,
       base: this.base,
       user: req.user,
@@ -147,7 +147,5 @@ class AdminBase extends HasModels {
 }
 
 // Nxus requires modules to provide a module function
-var module = function () {}
-module.AdminBase = AdminBase
-export default module
+export default function () {}
 
