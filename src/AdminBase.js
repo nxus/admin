@@ -84,7 +84,7 @@ export class AdminBase extends HasModels {
       find = find.populate(...this.populate)
     }
     find.then((insts) => {
-      this.templater.request('renderPartial', this.prefix+'-list', 'page', {
+      this.templater.renderPartial(this.prefix+'-list', 'page', {
         req,
         base: this.base,
         user: req.user,
@@ -100,7 +100,7 @@ export class AdminBase extends HasModels {
       find = find.populate(...this.populate)
     }
     find.then((inst) => {
-      this.templater.request('renderPartial', this.prefix+'-form', 'page', {
+      this.templater.renderPartial(this.prefix+'-form', 'page', {
         req,
         base: this.base,
         user: req.user,
@@ -114,7 +114,7 @@ export class AdminBase extends HasModels {
     let inst = {}
     if(this.populate && this.populate.length > 0) 
       for (let pop of this.populate) inst[pop] = {}
-    this.templater.request('renderPartial', this.prefix+'-form', 'page', {
+    this.templater.renderPartial(this.prefix+'-form', 'page', {
       req,
       base: this.base,
       user: req.user,
