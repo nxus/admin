@@ -13,13 +13,13 @@ export class AdminBase extends HasModels {
     this.prefix = this.template_prefix()
     this.populate = this.model_populate()
 
-    this.templater.provide('templateDir', 'ejs', this.template_dir(), this.prefix)
+    this.templater.templateDir('ejs', this.template_dir(), this.prefix)
 
-    this.router.provide('route', 'get', this.base, this._list.bind(this))
-    this.router.provide('route', 'get', this.base+'/new', this._new.bind(this))
-    this.router.provide('route', 'get', this.base+'/edit/:id', this._edit.bind(this))
-    this.router.provide('route', 'get', this.base+'/delete/:id', this._delete.bind(this))
-    this.router.provide('route', 'post', this.base+'/save', this.save.bind(this))
+    this.router.route('get', this.base, this._list.bind(this))
+    this.router.route('get', this.base+'/new', this._new.bind(this))
+    this.router.route('get', this.base+'/edit/:id', this._edit.bind(this))
+    this.router.route('get', this.base+'/delete/:id', this._delete.bind(this))
+    this.router.route('post', this.base+'/save', this.save.bind(this))
   }
 
   /**
