@@ -13,13 +13,13 @@ export class AdminBase extends HasModels {
     this.prefix = this.template_prefix()
     this.populate = this.model_populate()
 
-    this.templater.provide('templateDir', 'ejs', this.template_dir(), this.prefix)
+    this.templater.templateDir('ejs', this.template_dir(), this.prefix)
 
-    this.router.provide('route', 'get', this.base, this._list.bind(this))
-    this.router.provide('route', 'get', this.base+'/new', this._new.bind(this))
-    this.router.provide('route', 'get', this.base+'/edit/:id', this._edit.bind(this))
-    this.router.provide('route', 'get', this.base+'/delete/:id', this._delete.bind(this))
-    this.router.provide('route', 'post', this.base+'/save', this.save.bind(this))
+    this.router.route('get', this.base, this._list.bind(this))
+    this.router.route('get', this.base+'/new', this._new.bind(this))
+    this.router.route('get', this.base+'/edit/:id', this._edit.bind(this))
+    this.router.route('get', this.base+'/delete/:id', this._delete.bind(this))
+    this.router.route('post', this.base+'/save', this.save.bind(this))
   }
 
   /**
@@ -84,7 +84,7 @@ export class AdminBase extends HasModels {
       find = find.populate(...this.populate)
     }
     find.then((insts) => {
-      this.templater.request('renderPartial', this.prefix+'-list', 'page', {
+      this.templater.renderPartial(this.prefix+'-list', 'page', {
         req,
         base: this.base,
         user: req.user,
@@ -100,7 +100,7 @@ export class AdminBase extends HasModels {
       find = find.populate(...this.populate)
     }
     find.then((inst) => {
-      this.templater.request('renderPartial', this.prefix+'-form', 'page', {
+      this.templater.renderPartial(this.prefix+'-form', 'page', {
         req,
         base: this.base,
         user: req.user,
@@ -114,7 +114,7 @@ export class AdminBase extends HasModels {
     let inst = {}
     if(this.populate && this.populate.length > 0) 
       for (let pop of this.populate) inst[pop] = {}
-    this.templater.request('renderPartial', this.prefix+'-form', 'page', {
+    this.templater.renderPartial(this.prefix+'-form', 'page', {
       req,
       base: this.base,
       user: req.user,

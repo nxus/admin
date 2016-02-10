@@ -27,13 +27,13 @@
     "babel-runtime": "^5.7.0"
   },
   "peerDependencies": {
-    "@nxus/core": "^2.2.0",
+    "@nxus/core": "^2.3.0",
     "@nxus/router": "^2.2.0",
     "@nxus/templater": "^2.2.0",
     "@nxus/storage": "^2.2.2"
   },
   "devDependencies": {
-    "@nxus/core": "^2.2.0",
+    "@nxus/core": "^2.3.0",
     "babel": "^5.7.0",
     "chai": "^3.4.1",
     "chai-as-promised": "^5.1.0",
