@@ -1,6 +1,6 @@
 {
   "name": "@nxus/admin",
-  "version": "2.0.2",
+  "version": "2.3.0",
   "description": "Administrative CRUD screens for Nxus applications",
   "main": "lib/AdminBase.js",
   "scripts": {
