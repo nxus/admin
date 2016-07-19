@@ -1,3 +1,3 @@
-# @nxus/admin
+# Deprecated
 
-Administrative CRUD screens for `@nxus/storage` models.
+Please use [nxus-admin-ui](https://github.com/nxus/admin-ui)
