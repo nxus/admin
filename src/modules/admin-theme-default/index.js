@@ -1,6 +1,7 @@
 
 import {NxusModule} from 'nxus-core'
 import {templater} from 'nxus-templater'
+import {router} from 'nxus-router'
  
 
 class AdminDefaultTheme extends NxusModule {
@@ -8,6 +9,8 @@ class AdminDefaultTheme extends NxusModule {
     super()
     templater.template(__dirname+'/layouts/admin-default.ejs')
     templater.template(__dirname+'/layouts/admin-page.ejs', 'admin-default')
+
+    router.staticRoute('/admin/assets', __dirname+'/assets')
   }
 }
 

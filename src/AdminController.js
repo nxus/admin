@@ -1,4 +1,5 @@
 import {EditController} from 'nxus-web'
+import {nav} from 'nxus-web/lib/modules/web-nav'
 import morph from 'morph'
 
 class AdminController extends EditController {
@@ -8,6 +9,10 @@ class AdminController extends EditController {
     opts.routePrefix = opts.routePrefix || '/admin/'+_modelIdentity
     opts.pageTemplate = opts.pageTemplate || 'admin-page'
     super(opts)
+    this.displayName = morph.toTitle(this.modelIdentity)
+    this.icon = opts.icon || 'fa fa-files-o'
+    nav.add('admin-sidebar', this.displayName, this.routePrefix, {subMenu: this.prefix+'-submenu', icon: this.icon})
+    nav.add(this.prefix+'-submenu', 'Create', this.routePrefix+'/create', {icon: 'fa fa-plus'})
   } 
 }
 
