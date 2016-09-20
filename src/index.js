@@ -5,8 +5,7 @@ import {NxusModule} from 'nxus-core'
 import {router} from 'nxus-router'
 import {templater} from 'nxus-templater'
 import {nav} from 'nxus-web'
-
-import AdminController from './AdminController'
+import {application as app} from 'nxus-core'
 
 import _ from 'underscore'
 import morph from 'morph'
@@ -20,6 +19,10 @@ class Admin extends NxusModule {
     super()
 
     if(this.config.adminUrl[0] != '/') this.config.adminUrl = "/"+this.config.adminUrl
+
+    if(!app.config.admin) app.config.admin = {}
+
+    app.config.admin = Object.assign({adminUrl: this.config.adminUrl}, app.config.admin)
   }
 
   _defaultConfig() {
@@ -27,6 +30,13 @@ class Admin extends NxusModule {
       pageTemplate: 'admin-page', 
       adminUrl: '/admin'
     }
+  }
+
+  /**
+   * @return {String} the root Url where the admin interface is available.
+   */
+  getAdminUrl() {
+    return this.config.adminUrl
   }
 
   /**
@@ -85,7 +95,9 @@ class Admin extends NxusModule {
   _addHandler(handler, opts = {method: 'get'}) {
     let route = opts.route
     if(!route) throw new Exception('Admin page must specify a route')
-    
+
+    let method = opts.method || 'get'
+
     if(handler.length == 3) return router.route(method, route, handler)
     
     router.route(method, route, (req, res) => {
@@ -112,11 +124,14 @@ class Admin extends NxusModule {
    * @param  {Object} 
    * @return {[type]}
    */
-  manage (model) {
-    new AdminController({modelIdentity: model})
+  manage(opts = {}) {
+    if(_.isString(opts)) opts = {model: opts}
+    if(!opts.model) throw new Error('Admin.manage must be called with a model attribute or string name')
+    new AdminController({modelIdentity: opts.model, ...opts})
   }
 }
 
 var admin = Admin.getProxy()
+import AdminController from './AdminController'
 export {Admin as default, admin, AdminController}
 
