@@ -135,8 +135,7 @@ class Admin extends NxusModule {
   manage(opts = {}) {
     if(_.isString(opts)) opts = {model: opts}
     if(!opts.model) throw new Error('Admin.manage must be called with a model attribute or string name')
-    if(!opts.prefix) opts.prefix = opts.model+"-admin"
-    new AdminController({modelIdentity: opts.model, ...opts})
+    new AdminController(opts)
   }
 }
 
