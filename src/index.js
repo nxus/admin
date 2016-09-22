@@ -24,7 +24,8 @@ class Admin extends NxusModule {
 
     app.config.admin = Object.assign({adminUrl: this.config.adminUrl}, app.config.admin)
 
-    router.route("GET", this.config.adminUrl, ::this._home)
+    router.route('GET', this.config.adminUrl, ::this._home)
+    templater.template(__dirname+'/templates/admin-index.ejs', this.config.pageTemplate)
   }
 
   _defaultConfig() {
@@ -35,9 +36,7 @@ class Admin extends NxusModule {
   }
 
   _home(req, res) {
-    return templater.render('admin-page', {
-      content: "Welcome, administrator."
-    })
+    return templater.render('admin-index')
       .then(::res.send)
   }
 

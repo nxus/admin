@@ -7,7 +7,7 @@
     "preversion": "npm test",
     "postversion": "npm run build-docs && git push && git push --tags",
     "test": "NODE_ENV=test mocha --recursive --compilers js:babel-register -R spec src/**/*",
-    "compile": "babel src --out-dir lib --ignore src/modules/admin-theme-default/assets; cp -r src/modules/admin-theme-default/assets lib/modules/admin-theme-default/; cp -r src/modules/admin-theme-default/partials lib/modules/admin-theme-default/; cp -r src/modules/admin-theme-default/layouts lib/modules/admin-theme-default/",
+    "compile": "babel src --out-dir lib --ignore src/modules/admin-theme-default/assets; cp -r src/modules/admin-theme-default/assets lib/modules/admin-theme-default/; cp -r src/modules/admin-theme-default/partials lib/modules/admin-theme-default/; cp -r src/modules/admin-theme-default/layouts lib/modules/admin-theme-default/; cp -r src/templates lib/",
     "prepublish": "npm run compile",
     "postpublish": "npm run build-docs && npm run publish-docs",
     "build-docs": "export NAME=`npm view . name`; export VERSION=`npm view . version`; documentation readme ./src/index.js --name $NAME --project-version $VERSION --readme-file ./README.md -s $NAME",
