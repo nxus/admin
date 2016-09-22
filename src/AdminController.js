@@ -23,6 +23,19 @@ class AdminController extends EditController {
     
     nav.add('admin-sidebar', this.displayName, this.routePrefix, {subMenu: this.prefix+'-submenu', icon: this.icon, order: this.order})
     nav.add(this.prefix+'-submenu', 'Create', this.routePrefix+'/create', {icon: 'fa fa-plus'})
+
+    actions.add(this.templatePrefix+"-list", "Add", "/create", {
+      icon: "fa fa-plus"
+    })
+
+    actions.add(this.templatePrefix+"-list", "Edit", "/edit/", {
+      group: "instance",
+      icon: "fa fa-edit"
+    })
+    actions.add(this.templatePrefix+"-list", "Delete", "/delete/", {
+      group: "instance",
+      icon: "fa fa-remove"
+    })
   } 
 }
 
