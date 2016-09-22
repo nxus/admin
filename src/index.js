@@ -23,6 +23,9 @@ class Admin extends NxusModule {
     if(!app.config.admin) app.config.admin = {}
 
     app.config.admin = Object.assign({adminUrl: this.config.adminUrl}, app.config.admin)
+
+    templater.template()
+    router.route("GET", this.config.adminUrl, ::this._home)
   }
 
   _defaultConfig() {
@@ -30,6 +33,13 @@ class Admin extends NxusModule {
       pageTemplate: 'admin-page', 
       adminUrl: '/admin'
     }
+  }
+
+  _home(req, res) {
+    return templater.render('admin-page', {
+      content: "Welcome, administrator."
+    })
+      .then(::res.send)
   }
 
   /**
