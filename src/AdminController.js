@@ -1,6 +1,7 @@
 import {EditController} from 'nxus-web'
 import {nav} from 'nxus-web'
 import {actions} from 'nxus-web'
+import {permissions} from 'nxus-users'
 import morph from 'morph'
 
 import {application as app} from 'nxus-core'
@@ -36,6 +37,13 @@ class AdminController extends EditController {
       group: "instance",
       icon: "fa fa-remove"
     })
+
+    permissions.allow(
+      "admin-manage-"+this.modelIdentity,
+      this.routePrefix,
+      null,
+      "Admin"
+    )
   } 
 }
 
