@@ -24,7 +24,6 @@ class Admin extends NxusModule {
 
     app.config.admin = Object.assign({adminUrl: this.config.adminUrl}, app.config.admin)
 
-    templater.template()
     router.route("GET", this.config.adminUrl, ::this._home)
   }
 
