@@ -15,7 +15,7 @@ class AdminController extends EditController {
 
     super(opts)
 
-    this.displayName = morph.toTitle(this.modelIdentity)
+    this.displayName = opts.displayName || morph.toTitle(this.modelIdentity)
     this.icon = opts.icon || 'fa fa-files-o'
     this.order = opts.order || 0
 
