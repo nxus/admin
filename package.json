@@ -6,7 +6,7 @@
   "scripts": {
     "preversion": "npm test",
     "postversion": "npm run build-docs && git push && git push --tags",
-    "test": "NODE_ENV=test mocha --recursive --compilers js:babel-register -R spec src/**/*",
+    "test": "NODE_ENV=test mocha --compilers js:babel-core/register -R spec src/test/*.js",
     "compile": "babel src --out-dir lib --ignore src/modules/admin-theme-default/assets; cp -r src/modules/admin-theme-default/assets lib/modules/admin-theme-default/; cp -r src/modules/admin-theme-default/partials lib/modules/admin-theme-default/; cp -r src/modules/admin-theme-default/layouts lib/modules/admin-theme-default/; cp -r src/templates lib/",
     "prepublish": "npm run compile",
     "postpublish": "npm run build-docs && npm run publish-docs",
