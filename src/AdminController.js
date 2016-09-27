@@ -34,7 +34,9 @@ class AdminController extends EditController {
     })
     actions.add(this.templatePrefix+"-list", "Delete", "/delete/", {
       group: "instance",
-      icon: "fa fa-remove"
+      icon: "fa fa-remove",
+      template: 'actions-button-post',
+      templateMinimal: 'actions-icon-post'
     })
   } 
 }
