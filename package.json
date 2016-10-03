@@ -35,7 +35,7 @@
     "nxus-core": "^4.0.0-0",
     "nxus-router": "^4.0.0-0",
     "nxus-templater": "^4.0.0-0",
-    "nxus-users": "^4.0.0-1",
+    "nxus-users": "^4.0.0-2",
     "nxus-web": "^4.0.0-3",
     "underscore": "^1.8.3"
   },
