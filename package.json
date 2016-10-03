@@ -1,6 +1,6 @@
 {
   "name": "nxus-admin",
-  "version": "4.0.0-0",
+  "version": "4.0.0-1",
   "description": "Administration components for Nxus applications",
   "main": "lib",
   "scripts": {
@@ -35,8 +35,8 @@
     "nxus-core": "^4.0.0-0",
     "nxus-router": "^4.0.0-0",
     "nxus-templater": "^4.0.0-0",
-    "nxus-users": "^4.0.0-0",
-    "nxus-web": "^4.0.0-1",
+    "nxus-users": "^4.0.0-1",
+    "nxus-web": "^4.0.0-3",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
