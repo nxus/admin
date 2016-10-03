@@ -6,6 +6,7 @@ import {router} from 'nxus-router'
 import {templater} from 'nxus-templater'
 import {nav} from 'nxus-web'
 import {application as app} from 'nxus-core'
+import {users} from 'nxus-users'
 
 import _ from 'underscore'
 import morph from 'morph'
@@ -26,6 +27,8 @@ class Admin extends NxusModule {
 
     router.route('GET', this.config.adminUrl, ::this._home)
     templater.template(__dirname+'/templates/admin-index.ejs', this.config.pageTemplate)
+
+    users.protectedRoute(this.config.adminUrl+'*')
   }
 
   _defaultConfig() {
