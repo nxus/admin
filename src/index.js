@@ -72,6 +72,7 @@ class Admin extends NxusModule {
    * * `method`: the HTTP method to use for the route.
    * * `label`: the nav label to use. Defaults to a title version of the route.
    * * `nav`: set to `false` to skip creating a nav item: useful for routes with no display.
+   * * `directHandler`: if true, the handler is a full route handler. Otherwise, wrapped to send reponse
    * * `order`: the order of the nav menu.
    * * `icon`: the icon class to use for the page in the nav and other places.
    * 
@@ -85,7 +86,7 @@ class Admin extends NxusModule {
 
     opts.route = this._cleanRoute(opts.route)
 
-    if(!opts.nav || opts.nav !== false) this._addNav(opts.label, opts.route, opts)
+    if(opts.nav === undefined || opts.nav) this._addNav(opts.label, opts.route, opts)
 
     if(_.isString(responder)) return this._addPartial(responder, opts)
     else return this._addHandler(responder, opts)
@@ -109,7 +110,7 @@ class Admin extends NxusModule {
 
     let method = opts.method || 'get'
 
-    if(handler.length == 3) return router.route(method, route, handler)
+    if(opts.directHandler) return router.route(method, route, handler)
     
     router.route(method, route, (req, res) => {
       return Promise.resolve().then(() => {
@@ -144,5 +145,6 @@ class Admin extends NxusModule {
 
 var admin = Admin.getProxy()
 import AdminController from './AdminController'
-export {Admin as default, admin, AdminController}
+import AdminImportController from './AdminImportController'
+export {Admin as default, admin, AdminController, AdminImportController}
 
