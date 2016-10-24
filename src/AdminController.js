@@ -9,6 +9,18 @@ import morph from 'morph'
 
 import {application as app} from 'nxus-core'
 
+/**
+ * A base class for admin model controllers. Overrides the EditController options defaults
+ * to provide admin prefixes for routes ("/admin/model-identity") and templates ("model-identity-admin"), and by default wraps templates in 'admin-page' rather than 'page'.
+ * 
+ * # Parameters (in addition to EditController parameters)
+ *  * `icon` - icon class for nav - defaults to fa-files-o
+ *  * `order` - optional ordering for nav
+ *  * `uploadType` - dataManager import type (e.g. csv, json), if set an Import action is available.
+ *  * `uploadOptions` - options to pass to dataManager parser
+ */
+
+
 class AdminController extends EditController {
   constructor(opts) {
     let _modelIdentity = opts.model || opts.modelIdentity || morph.toDashed(new.target.name)

@@ -133,8 +133,9 @@ class Admin extends NxusModule {
   }
 
   /**
-   * @param  {Object} 
-   * @return {[type]}
+   * Create an AdminController for a given model. Takes either the model identity, or an 
+   *  object to pass to the constructor of AdminController with at least {model: 'identity'}
+   * @param  {String|Object} opts  The model identity or options object.
    */
   manage(opts = {}) {
     if(_.isString(opts)) opts = {model: opts}
