@@ -145,6 +145,5 @@ class Admin extends NxusModule {
 
 var admin = Admin.getProxy()
 import AdminController from './AdminController'
-import AdminImportController from './AdminImportController'
-export {Admin as default, admin, AdminController, AdminImportController}
+export {Admin as default, admin, AdminController}
 
