@@ -1,0 +1,39 @@
+<ul class="nav nav-pills nav-stacked" id="<%- menu %>">
+  <% items.forEach((i) => { %>
+    <li>
+      <a href="<%- i.link %>">
+        <% if(i.icon) { %>
+          <i class="<%- i.icon %>"></i>
+        <% } %>
+        <%- i.label %>
+      </a>
+    <% if(i.subMenu) { %> 
+      <ul class="nav nav-second-level">
+        <% i.subMenu.forEach((s) => { %>
+          <li>
+            <a href="<%- s.link %>">
+              <% if(s.icon) { %>
+                <i class="<%- s.icon %>"></i>
+              <% } %>
+              <%- s.label %>
+            </a>
+            <% if(s.subMenu) { %>
+                <ul class="nav nav-third-level">
+                  <% s.subMenu.forEach((g) => { %>
+                    <li>
+                      <a href="<%- g.link %>">
+                      <% if(g.icon) { %>
+                        <i class="<%- g.icon %>"></i>
+                      <% } %>
+                      <%- g.label %></a>
+                    </li>
+                  <% }) %>
+                </ul>
+              <% } %>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+    </li>
+  <% }) %>
+</ul>
