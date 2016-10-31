@@ -33,6 +33,7 @@
     "morph": "^0.2.0",
     "nxus-clientjs": "^4.0.0-1",
     "nxus-core": "^4.0.0-0",
+    "nxus-data-manager": "^4.0.0-0",
     "nxus-router": "^4.0.0-0",
     "nxus-templater": "^4.0.0-0",
     "nxus-users": "^4.0.0-2",
