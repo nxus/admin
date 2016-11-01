@@ -99,12 +99,14 @@ class AdminController extends EditController {
   }
   
   _saveImport (req, res) {
-    let opts = {type: this.uploadType, ...this.uploadOptions}
-    dataManager.importFileToModel(this.modelIdentity, req.file.path, opts)
-    .then((insts) => {
+    this._performImport(req.file.path).then((insts) => {
       req.flash('info', 'Imported '+insts.length+' '+this.displayName)
       res.redirect(this.routePrefix)
     })
+  }
+  _performImport (path)  {
+    let opts = {type: this.uploadType, ...this.uploadOptions}
+    return dataManager.importFileToModel(this.modelIdentity, path, opts)
   }
 }
 
