@@ -6,6 +6,7 @@ import {templater} from 'nxus-templater'
 import {dataManager} from 'nxus-data-manager'
 import {admin} from './'
 import morph from 'morph'
+import url from 'url'
 
 import {application as app} from 'nxus-core'
 
@@ -53,22 +54,17 @@ class AdminController extends EditController {
     let menu = 'admin-sidebar'
     if (this.adminGroup) {
       menu = "admin-"+this.adminGroup+'-submenu'
-      nav.add('admin-sidebar', this.adminGroup, adminUrl, {subMenu: menu, icon: 'fa fa-folder-open-o', order: this.order})
+      admin.addNav(this.adminGroup, "", {subMenu: menu, icon: 'fa fa-folder-open-o', order: this.order})
     }
-    nav.add(menu, this.displayName, this.routePrefix, {subMenu: this.prefix+'-submenu', icon: this.icon, order: this.order})
-    nav.add(this.prefix+'-submenu', 'View', this.routePrefix, {icon: 'fa fa-list'})
-    nav.add(this.prefix+'-submenu', 'Create', this.routePrefix+'/create', {icon: 'fa fa-plus'})
+    this._subMenu = this.prefix+'-submenu'
+    nav.add(menu, this.displayName, this.routePrefix, {subMenu: this._subMenu, icon: this.icon, order: this.order})
 
-    actions.add(this.templatePrefix+"-list", "Add", "/create", {
-      icon: "fa fa-plus"
-    })
+    this.addNav('View', '', {icon: 'fa fa-list'})
+    this.addNav('Create', 'create', {icon: 'fa fa-plus'})
 
-    actions.add(this.templatePrefix+"-list", "Edit", "/edit/", {
-      group: "instance",
-      icon: "fa fa-edit"
-    })
-    actions.add(this.templatePrefix+"-list", "Delete", "/delete/", {
-      group: "instance",
+    this.addAction('list', 'Add', "/create", {icon: 'fa fa-plus'})
+    this.addInstanceAction("Edit", "/edit/", {icon: "fa fa-edit"})
+    this.addInstanceAction("Delete", "/delete/", {
       icon: "fa fa-remove",
       template: 'actions-button-post',
       templateMinimal: 'actions-icon-post'
@@ -85,6 +81,40 @@ class AdminController extends EditController {
       this._setupImport()
     }
   }
+
+  /**
+   * Register an admin nav menu item under this model
+   *  
+   * @param  {String} label Label for nav item
+   * @param  {String} route Either a relative (joined with adminUrl) or absolute URL to link to
+   * @param  {Object} opts  nav menu options for web-nav, e.g. icon, order
+   */
+  addNav(label, route, opts={}) {
+    return nav.add(this._subMenu, label, url.resolve(this.routePrefix+"/", route), opts)
+  }
+
+  /**
+   * Register an admin action item for this model, wrapping web-actions
+   *  
+   * @param  {String} page  Template suffix: 'list', 'edit', 'create', 'detail'
+   * @param  {String} label Label for action
+   * @param  {String} route Sub-route for action
+   * @param  {Object} opts  options for web-actions, e.g. icon, template
+   */
+  addAction(page, label, route, opts={}) {
+    return actions.add(this.templatePrefix+"-"+page, label, route, opts)
+  }
+
+  /**
+   * Register an admin instance action item for this model's list page, wrapping web-actions
+   *  
+   * @param  {String} label Label for action
+   * @param  {String} route Sub-route for action
+   * @param  {Object} opts  options for web-actions, e.g. icon, template
+   */
+  addInstanceAction(label, route, opts={}) {
+    return this.addAction('list', label, route, {group: 'instance', ...opts})
+  }    
 
   _setupImport() {
     let importRoute = this.routePrefix+'/import'
