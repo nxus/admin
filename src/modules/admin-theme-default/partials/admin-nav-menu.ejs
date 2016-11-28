@@ -1,7 +1,7 @@
 <ul class="nav nav-pills nav-stacked" id="<%- menu %>">
   <% items.forEach((i) => { %>
-    <li>
-      <a href="<%- i.link %>">
+    <li class="nav-item">
+      <a href="<%- i.link %>" class="nav-link">
         <% if(i.icon) { %>
           <i class="<%- i.icon %>"></i>
         <% } %>
@@ -10,8 +10,8 @@
     <% if(i.subMenu) { %> 
       <ul class="nav nav-second-level">
         <% i.subMenu.forEach((s) => { %>
-          <li>
-            <a href="<%- s.link %>">
+          <li class="nav-item">
+            <a href="<%- s.link %>" class="nav-link">
               <% if(s.icon) { %>
                 <i class="<%- s.icon %>"></i>
               <% } %>
@@ -20,8 +20,8 @@
             <% if(s.subMenu) { %>
                 <ul class="nav nav-third-level">
                   <% s.subMenu.forEach((g) => { %>
-                    <li>
-                      <a href="<%- g.link %>">
+                    <li class="nav-item">
+                      <a href="<%- g.link %>" class="nav-link">
                       <% if(g.icon) { %>
                         <i class="<%- g.icon %>"></i>
                       <% } %>
