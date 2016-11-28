@@ -26,7 +26,12 @@ class AdminController extends EditController {
     let _modelIdentity = opts.model || opts.modelIdentity || morph.toDashed(new.target.name)
     opts.modelIdentity = _modelIdentity
     opts.prefix = opts.prefix || _modelIdentity+"-admin"
-    opts.routePrefix = opts.routePrefix || app.config.admin.adminUrl+"/"+_modelIdentity
+    opts.routePrefix = opts.routePrefix
+    let adminUrl = '/admin'
+    if (!opts.routePrefix && app.config && app.config.admin && app.config.admin.adminUrl) {
+      adminUrl = app.config.admin.adminUrl
+      opts.routePrefix = adminUrl+"/"+_modelIdentity
+    }
     opts.pageTemplate = opts.pageTemplate || 'admin-page'
 
     super(opts)
@@ -48,7 +53,7 @@ class AdminController extends EditController {
     let menu = 'admin-sidebar'
     if (this.adminGroup) {
       menu = "admin-"+this.adminGroup+'-submenu'
-      nav.add('admin-sidebar', this.adminGroup, app.config.admin.adminUrl, {subMenu: menu, icon: 'fa fa-folder-open-o', order: this.order})
+      nav.add('admin-sidebar', this.adminGroup, adminUrl, {subMenu: menu, icon: 'fa fa-folder-open-o', order: this.order})
     }
     nav.add(menu, this.displayName, this.routePrefix, {subMenu: this.prefix+'-submenu', icon: this.icon, order: this.order})
     nav.add(this.prefix+'-submenu', 'View', this.routePrefix, {icon: 'fa fa-list'})
