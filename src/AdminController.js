@@ -51,6 +51,7 @@ class AdminController extends EditController {
       nav.add('admin-sidebar', this.adminGroup, app.config.admin.adminUrl, {subMenu: menu, icon: 'fa fa-folder-open-o', order: this.order})
     }
     nav.add(menu, this.displayName, this.routePrefix, {subMenu: this.prefix+'-submenu', icon: this.icon, order: this.order})
+    nav.add(this.prefix+'-submenu', 'View', this.routePrefix, {icon: 'fa fa-list'})
     nav.add(this.prefix+'-submenu', 'Create', this.routePrefix+'/create', {icon: 'fa fa-plus'})
 
     actions.add(this.templatePrefix+"-list", "Add", "/create", {
