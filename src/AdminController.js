@@ -31,17 +31,27 @@ class AdminController extends EditController {
 
     super(opts)
 
-
     this.displayName = opts.displayName || morph.toTitle(this.modelIdentity)
     this.icon = opts.icon || 'fa fa-files-o'
     this.order = opts.order || 0
 
     this.uploadOptions = opts.uploadOptions || {}
     this.uploadType = opts.uploadType || null
+
+    this.adminGroup = opts.adminGroup || null
+    if(!this.adminGroup && _modelIdentity.indexOf('-') > 0) {
+      this.adminGroup = morph.toTitle(_modelIdentity.split('-')[0])
+    }
     
     if(this.routePrefix[0] != '/') this.routePrefix = '/'+this.routePrefix
-    
-    nav.add('admin-sidebar', this.displayName, this.routePrefix, {subMenu: this.prefix+'-submenu', icon: this.icon, order: this.order})
+
+    let menu = 'admin-sidebar'
+    if (this.adminGroup) {
+      menu = "admin-"+this.adminGroup+'-submenu'
+      nav.add('admin-sidebar', this.adminGroup, app.config.admin.adminUrl, {subMenu: menu, icon: 'fa fa-folder-open-o', order: this.order})
+    }
+    nav.add(menu, this.displayName, this.routePrefix, {subMenu: this.prefix+'-submenu', icon: this.icon, order: this.order})
+    nav.add(this.prefix+'-submenu', 'View', this.routePrefix, {icon: 'fa fa-list'})
     nav.add(this.prefix+'-submenu', 'Create', this.routePrefix+'/create', {icon: 'fa fa-plus'})
 
     actions.add(this.templatePrefix+"-list", "Add", "/create", {

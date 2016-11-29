@@ -9,6 +9,7 @@ class AdminDefaultTheme extends NxusModule {
     super()
     templater.template(__dirname+'/layouts/admin-default.ejs')
     templater.template(__dirname+'/layouts/admin-page.ejs', 'admin-default')
+    templater.template(__dirname+'/partials/admin-nav-menu.ejs')
 
     router.staticRoute('/admin/assets', __dirname+'/assets')
   }
