@@ -33,5 +33,9 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <% if (typeof headScripts != "undefined") { %>
+    <%- render('included-scripts', {scripts: headScripts }) %>
+    <% } %>
+    <%- render('included-imports') %>
     <%- render('included-styles') %>
 </head>
