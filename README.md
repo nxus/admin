@@ -42,6 +42,16 @@ Other options include:
 -   `opts` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object))** The route or options for the page
 -   `responder` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function))** The string partial name or handler function for the route
 
+### addNav
+
+Register an admin nav menu item, wraps web-nav for relative URls and menu name
+
+**Parameters**
+
+-   `label` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Label for nav item
+-   `route` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Either a relative (joined with adminUrl) or absolute URL to link to
+-   `opts` **\[[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)](default {})** nav menu options for web-nav, e.g. icon, order
+
 ### manage
 
 Create an AdminController for a given model. Takes either the model identity, or an 
@@ -64,3 +74,34 @@ to provide admin prefixes for routes ("/admin/model-identity") and templates ("m
 -   `order` - optional ordering for nav
 -   `uploadType` - dataManager import type (e.g. csv, json), if set an Import action is available.
 -   `uploadOptions` - options to pass to dataManager parser
+
+### addNav
+
+Register an admin nav menu item under this model
+
+**Parameters**
+
+-   `label` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Label for nav item
+-   `route` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Either a relative (joined with adminUrl) or absolute URL to link to
+-   `opts` **\[[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)](default {})** nav menu options for web-nav, e.g. icon, order
+
+### addAction
+
+Register an admin action item for this model, wrapping web-actions
+
+**Parameters**
+
+-   `page` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Template suffix: 'list', 'edit', 'create', 'detail'
+-   `label` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Label for action
+-   `route` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Sub-route for action
+-   `opts` **\[[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)](default {})** options for web-actions, e.g. icon, template
+
+### addInstanceAction
+
+Register an admin instance action item for this model's list page, wrapping web-actions
+
+**Parameters**
+
+-   `label` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Label for action
+-   `route` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Sub-route for action
+-   `opts` **\[[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)](default {})** options for web-actions, e.g. icon, template
