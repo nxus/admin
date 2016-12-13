@@ -7,6 +7,7 @@ import {templater} from 'nxus-templater'
 import {nav} from 'nxus-web'
 import {application as app} from 'nxus-core'
 import {users} from 'nxus-users'
+import url from 'url'
 
 import _ from 'underscore'
 import morph from 'morph'
@@ -132,6 +133,18 @@ class Admin extends NxusModule {
     return route
   }
 
+  /**
+   * Register an admin nav menu item, wraps web-nav for relative URls and menu name
+   *  
+   * @param  {String} label Label for nav item
+   * @param  {String} route Either a relative (joined with adminUrl) or absolute URL to link to
+   * @param  {Object} opts  nav menu options for web-nav, e.g. icon, order
+   */
+  addNav(label, route, opts={}) {
+    nav.add('admin-sidebar', label, url.resolve(this.config.adminUrl+"/", route), opts)
+  }
+  
+  
   /**
    * Create an AdminController for a given model. Takes either the model identity, or an 
    *  object to pass to the constructor of AdminController with at least {model: 'identity'}
