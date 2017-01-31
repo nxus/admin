@@ -128,7 +128,7 @@ class AdminController extends EditController {
       route: exportRoute,
       nav: false,
       directHandler: true
-    }, ::this._export)
+    }, ::this._download)
     nav.add(this.prefix+'-submenu', 'Download', exportRoute, {icon: 'fa fa-download'})
     actions.add(this.templatePrefix+"-list", "Download", "/export", {
       icon: "fa fa-download"
