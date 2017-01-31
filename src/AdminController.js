@@ -7,6 +7,8 @@ import {dataManager} from 'nxus-data-manager'
 import {admin} from './'
 import morph from 'morph'
 import url from 'url'
+import _ from 'underscore'
+import moment from 'moment'
 
 import {application as app} from 'nxus-core'
 
@@ -43,6 +45,7 @@ class AdminController extends EditController {
 
     this.uploadOptions = opts.uploadOptions || {}
     this.uploadType = opts.uploadType || null
+    this.downloadType = opts.downloadType || null
 
     this.adminGroup = opts.adminGroup || null
     if(!this.adminGroup && _modelIdentity.indexOf('-') > 0) {
@@ -80,6 +83,9 @@ class AdminController extends EditController {
     if (this.uploadType) {
       this._setupImport()
     }
+    if (this.downloadType) {
+      this._setupDownload()
+    }
   }
 
   /**
@@ -116,6 +122,19 @@ class AdminController extends EditController {
     return this.addAction('list', label, route, {group: 'instance', ...opts})
   }    
 
+  _setupDownload() {
+    let exportRoute = this.routePrefix+'/export'
+    admin.page({
+      route: exportRoute,
+      nav: false,
+      directHandler: true
+    }, ::this._download)
+    nav.add(this.prefix+'-submenu', 'Download', exportRoute, {icon: 'fa fa-download'})
+    actions.add(this.templatePrefix+"-list", "Download", "/export", {
+      icon: "fa fa-download"
+    })
+  }
+  
   _setupImport() {
     let importRoute = this.routePrefix+'/import'
     dataManager.uploadPath(importRoute, 'file')
@@ -152,6 +171,30 @@ class AdminController extends EditController {
   _performImport (path)  {
     let opts = {type: this.uploadType, ...this.uploadOptions}
     return dataManager.importFileToModel(this.modelIdentity, path, opts)
+  }
+
+  _download (req, res) {
+    return Promise.all([
+      this.model.find(),
+      this._modelAttributes(),
+    ]).spread((records, attrs) => {
+      let dateAttrs = attrs.filter(x => x.type=='datetime' || x.type=='date')
+      records = records.map((x) => {
+        x = _.pick(x, this.displayFields)
+        dateAttrs.forEach((f) => {
+          if (x[f.name]) {
+            x[f.name] = moment(x[f.name]).format()
+          }
+        })
+        return x
+      })
+      return dataManager.export(this.downloadType, records)
+    }).then((contents) => {
+      res.type('text/'+this.downloadType)
+      res.attachment(`${this.displayName}.${this.downloadType}`)
+      res.send(contents)
+      
+    })
   }
 }
 
