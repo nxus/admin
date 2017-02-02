@@ -173,21 +173,40 @@ class AdminController extends EditController {
     return dataManager.importFileToModel(this.modelIdentity, path, opts)
   }
 
+  /**
+   * Override in subclass to do additional formatting of records for download
+   *  
+   * @param  {Object} record
+   * @returns {Object} formatted record
+   */
+  _formatDownloadRecord(record, attrs) {
+    let ret = {}
+    attrs.forEach((f) => {
+      ret[f.name] = record[f.name]
+      if (record[f.name]) {
+        if (f.type == 'datetime' || f.type == 'date') {
+          ret[f.name] = moment(ret[f.name]).format()
+          
+        }
+      }
+    })
+    return ret
+  }
+  
   _download (req, res) {
+    let find = this.model.find()
+    if (this.populate) {
+      find.populate(this.populate)
+    }
     return Promise.all([
-      this.model.find(),
-      this._modelAttributes(),
+      find,
+      this._modelAttributes(true),
     ]).spread((records, attrs) => {
-      let dateAttrs = attrs.filter(x => x.type=='datetime' || x.type=='date')
-      records = records.map((x) => {
-        x = _.pick(x, this.displayFields)
-        dateAttrs.forEach((f) => {
-          if (x[f.name]) {
-            x[f.name] = moment(x[f.name]).format()
-          }
-        })
-        return x
+      console.log(attrs)
+      return Promise.map(records, (x) => {
+        return this._formatDownloadRecord(x, attrs)
       })
+    }).then((records) => {
       return dataManager.export(this.downloadType, records)
     }).then((contents) => {
       res.type('text/'+this.downloadType)
