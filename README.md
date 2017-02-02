@@ -105,3 +105,14 @@ Register an admin instance action item for this model's list page, wrapping web-
 -   `label` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Label for action
 -   `route` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Sub-route for action
 -   `opts` **\[[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)](default {})** options for web-actions, e.g. icon, template
+
+### \_formatDownloadRecord
+
+Override in subclass to do additional formatting of records for download
+
+**Parameters**
+
+-   `record` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+-   `attrs`  
+
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** formatted record
