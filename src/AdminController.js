@@ -202,7 +202,6 @@ class AdminController extends EditController {
       find,
       this._modelAttributes(true),
     ]).spread((records, attrs) => {
-      console.log(attrs)
       return Promise.map(records, (x) => {
         return this._formatDownloadRecord(x, attrs)
       })
