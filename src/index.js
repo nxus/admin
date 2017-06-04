@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 import Promise from 'bluebird'
 import {NxusModule} from 'nxus-core'
@@ -34,7 +34,7 @@ class Admin extends NxusModule {
 
   _defaultConfig() {
     return {
-      pageTemplate: 'admin-page', 
+      pageTemplate: 'admin-page',
       adminUrl: '/admin'
     }
   }
@@ -53,7 +53,7 @@ class Admin extends NxusModule {
 
   /**
    * Registers a page with the admin interface.  Pages can be defined two different ways.
-   * 
+   *
    * ## Template Partials
    *
    * `admin.page('/route', 'partial-name')`
@@ -64,7 +64,7 @@ class Admin extends NxusModule {
    *
    * ## Options
    *
-   * The first argument can either be a string or an options hash.  If an options hash, it 
+   * The first argument can either be a string or an options hash.  If an options hash, it
    * must include a `route` attribute.
    *
    * Other options include:
@@ -76,7 +76,7 @@ class Admin extends NxusModule {
    * * `directHandler`: if true, the handler is a full route handler. Otherwise, wrapped to send reponse
    * * `order`: the order of the nav menu.
    * * `icon`: the icon class to use for the page in the nav and other places.
-   * 
+   *
    * @param {String|Object}  opts  The route or options for the page
    * @param {String|Function}  responder  The string partial name or handler function for the route
    */
@@ -99,7 +99,7 @@ class Admin extends NxusModule {
 
   _addPartial(partial, opts = {}) {
     let route = opts.route
-    if(!route) throw new Exception('Admin page must specify a route')
+    if(!route) throw new Error('Admin page must specify a route')
     router.route(route, (req, res) => {
       return templater.render(partial, {req, template: this.config.pageTemplate, ...opts}).then(::res.send)
     })
@@ -107,12 +107,12 @@ class Admin extends NxusModule {
 
   _addHandler(handler, opts = {method: 'get'}) {
     let route = opts.route
-    if(!route) throw new Exception('Admin page must specify a route')
+    if(!route) throw new Error('Admin page must specify a route')
 
     let method = opts.method || 'get'
 
     if(opts.directHandler) return router.route(method, route, handler)
-    
+
     router.route(method, route, (req, res) => {
       return Promise.resolve().then(() => {
         return handler({req, ...opts})
@@ -135,7 +135,7 @@ class Admin extends NxusModule {
 
   /**
    * Register an admin nav menu item, wraps web-nav for relative URls and menu name
-   *  
+   *
    * @param  {String} label Label for nav item
    * @param  {String} route Either a relative (joined with adminUrl) or absolute URL to link to
    * @param  {Object} opts  nav menu options for web-nav, e.g. icon, order
@@ -143,10 +143,10 @@ class Admin extends NxusModule {
   addNav(label, route, opts={}) {
     nav.add('admin-sidebar', label, url.resolve(this.config.adminUrl+"/", route), opts)
   }
-  
-  
+
+
   /**
-   * Create an AdminController for a given model. Takes either the model identity, or an 
+   * Create an AdminController for a given model. Takes either the model identity, or an
    *  object to pass to the constructor of AdminController with at least {model: 'identity'}
    * @param  {String|Object} opts  The model identity or options object.
    */
