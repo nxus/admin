@@ -60,7 +60,8 @@ class Admin extends NxusModule {
    *
    * ## Route Handlers
    *
-   * `admin.page('/route', (req, res) => {...})`
+   * `admin.page('/route', () => { // return a response to be rendered within admin template })`
+   * `admin.page({route: '/route', directHandler: true}, (req, res) => {...})`
    *
    * ## Options
    *
