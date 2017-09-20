@@ -22,7 +22,8 @@ Registers a page with the admin interface.  Pages can be defined two different w
 
 ### Route Handlers
 
-`admin.page('/route', (req, res) => {...})`
+`admin.page('/route', () => { // return a response to be rendered within admin template })`
+`admin.page({route: '/route', directHandler: true}, (req, res) => {...})`
 
 ### Options
 
