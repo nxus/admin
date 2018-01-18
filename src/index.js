@@ -28,8 +28,12 @@ class Admin extends NxusModule {
 
     router.route('GET', this.config.adminUrl, ::this._home)
     templater.template(__dirname+'/templates/admin-index.ejs', this.config.pageTemplate)
+    router.route('GET', this.config.adminUrl+"/help/:section", ::this._helpPage)
+    templater.template(__dirname+'/templates/admin-help.ejs', this.config.pageTemplate)
 
     users.protectedRoute(this.config.adminUrl+'*')
+
+    this._help = {}
   }
 
   _defaultConfig() {
@@ -40,7 +44,13 @@ class Admin extends NxusModule {
   }
 
   _home(req, res) {
-    return templater.render('admin-index')
+    return templater.render('admin-index', {help: this._help, title: "Welcome, Administrator"})
+      .then(::res.send)
+  }
+
+  _helpPage(req, res) {
+    let section = req.params.section
+    return templater.render('admin-help', {help: this._help[section], section, title: "Instructions for "+section})
       .then(::res.send)
   }
 
@@ -94,6 +104,19 @@ class Admin extends NxusModule {
     else return this._addHandler(responder, opts)
   }
 
+
+  /**
+   * Registers help text for the admin interface.
+   *
+   *
+   * @param {String}  section  The nav section
+   * @param {String}  welcome  The template partial name to render as welcome and help
+   * @param {String}  [detail]  An additional partial to render on the help detail
+   */
+  help(section, welcome, detail) {
+    this._help[section] = {welcome, detail}
+  }
+  
   _addNav(label, route, opts) {
     nav.add('admin-sidebar', label, route, opts)
   }
