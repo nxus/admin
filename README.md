@@ -45,6 +45,16 @@ Other options include:
 -   `opts` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object))** The route or options for the page
 -   `responder` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function))** The string partial name or handler function for the route
 
+#### help
+
+Registers help text for the admin interface.
+
+**Parameters**
+
+-   `section` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** The nav section
+-   `welcome` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** The template partial name to render as welcome and help
+-   `detail` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** An additional partial to render on the help detail
+
 #### addNav
 
 Register an admin nav menu item, wraps web-nav for relative URls and menu name

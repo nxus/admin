@@ -1,1 +1,8 @@
-<h2>Welcome, administrator.</h2>
+<% for (section in help) { %>
+  <h3><%= section %></h3>
+
+  <%- render(help[section].welcome) %>
+  <% if (help[section].detail) { %>
+    <p><a href="/admin/help/<%=section%>"Read more</a></p>
+  <% } %>
+<% } %>

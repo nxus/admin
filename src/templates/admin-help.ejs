@@ -1,0 +1,10 @@
+<% if (help === undefined) { %>
+  Unfortunately, we don't seem to have any help for that yet.
+<% } else { %>
+  <%- render(help.welcome) %>
+
+  <% if (help.detail !== undefined) { %>
+    <%- render(help.detail) %>
+  <% } %>
+<% } %>
+
