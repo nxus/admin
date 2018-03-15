@@ -195,10 +195,7 @@ class AdminController extends EditController {
   }
 
   _download (req, res) {
-    let find = this.model.find()
-    if (this.populate) {
-      find.populate(this.populate)
-    }
+    let find = this._find({query: {page: 1, items: 0}})
     return Promise.all([
       find,
       this._modelAttributes(true),
