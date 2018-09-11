@@ -1,9 +1,20 @@
+<%
+  const navIcons = {
+    submenu:  'fa fa-files-o',
+    group:    'fa fa-folder-open-o',
+    view:     'fa fa-list',
+    create:   'fa fa-plus',
+    download: 'fa fa-download',
+    upload:   'fa fa-upload',
+  }
+  function navIcon(icon, override) { return override || navIcons[icon] || icon }
+%>
 <ul class="nav nav-pills nav-stacked" id="<%- menu %>">
   <% items.forEach((i) => { %>
     <li class="nav-item">
       <a href="<%- i.link %>" class="nav-link">
         <% if(i.icon) { %>
-          <i class="<%- i.icon %>"></i>
+          <i class="<%- navIcon(i.icon, i.override) %>"></i>
         <% } %>
         <%- i.label %>
       </a>
@@ -13,7 +24,7 @@
           <li class="nav-item">
             <a href="<%- s.link %>" class="nav-link">
               <% if(s.icon) { %>
-                <i class="<%- s.icon %>"></i>
+                <i class="<%- navIcon(s.icon) %>"></i>
               <% } %>
               <%- s.label %>
             </a>
@@ -23,7 +34,7 @@
                     <li class="nav-item">
                       <a href="<%- g.link %>" class="nav-link">
                       <% if(g.icon) { %>
-                        <i class="<%- g.icon %>"></i>
+                        <i class="<%- navIcon(g.icon) %>"></i>
                       <% } %>
                       <%- g.label %></a>
                     </li>
