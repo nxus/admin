@@ -20,7 +20,7 @@ import {application as app} from 'nxus-core'
  *
  * # Parameters (in addition to EditController parameters)
  *  * `icon` - [deprecated] icon class for nav - defaults to fa-files-o
- *  * `iconClasses` - icon classes mapping (submenu, group, view, create, download, upload, add, edit, delete) to css classes
+ *  * `iconClasses` - icon classes mapping (submenu, group, view, create, download, upload, edit, delete) to css classes
  *  * `order` - optional ordering for nav
  *  * `uploadType` - dataManager import type (e.g. csv, json), if set an Import action is available.
  *  * `uploadOptions` - options to pass to dataManager parser
@@ -36,7 +36,6 @@ class AdminController extends EditController {
     create:   'fa fa-plus',
     download: 'fa fa-download',
     upload:   'fa fa-upload',
-    add:      'fa fa-plus',
     edit:     'fa fa-edit',
     delete:   'fa fa-remove'
   }
@@ -87,7 +86,7 @@ class AdminController extends EditController {
     this.addNav('View', '', {icon: this.iconClasses.view})
     this.addNav('Create', 'create', {icon: this.iconClasses.create})
 
-    this.addAction('list', 'Add', "/create", {icon: this.iconClasses.add})
+    this.addAction('list', 'Add', "/create", {icon: this.iconClasses.create})
     this.addInstanceAction("Edit", "/edit/", {icon: this.iconClasses.edit})
     this.addInstanceAction("Delete", "/delete/", {
       icon: this.iconClasses.delete,
