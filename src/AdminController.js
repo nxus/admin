@@ -20,6 +20,7 @@ import {application as app} from 'nxus-core'
  *
  * # Parameters (in addition to EditController parameters)
  *  * `icon` - [deprecated] icon class for nav - defaults to fa-files-o
+ *  * `iconClasses` - icon classes mapping (submenu, group, view, create, download, upload, add, edit, delete) to css classes
  *  * `order` - optional ordering for nav
  *  * `uploadType` - dataManager import type (e.g. csv, json), if set an Import action is available.
  *  * `uploadOptions` - options to pass to dataManager parser
@@ -27,6 +28,20 @@ import {application as app} from 'nxus-core'
 
 
 class AdminController extends EditController {
+
+  iconClasses = {
+    submenu:  'fa fa-files-o',
+    group:    'fa fa-folder-open-o',
+    view:     'fa fa-list',
+    create:   'fa fa-plus',
+    download: 'fa fa-download',
+    upload:   'fa fa-upload',
+    add:      'fa fa-plus',
+    edit:     'fa fa-edit',
+    delete:   'fa fa-remove'
+  }
+  
+  
   constructor(opts) {
     let _modelIdentity = opts.model || opts.modelIdentity || morph.toDashed(new.target.name)
     opts.modelIdentity = _modelIdentity
@@ -44,6 +59,12 @@ class AdminController extends EditController {
     this.displayName = opts.displayName || morph.toTitle(this.modelIdentity)
     this.order = opts.order || 0
 
+    Object.assign(this.iconClasses, opts.iconClasses || {})
+    // deprecated options
+    if (opts.icon) {
+      this.iconClasses.submenu = opts.icon
+    }
+
     this.uploadOptions = opts.uploadOptions || {}
     this.uploadType = opts.uploadType || null
     this.downloadType = opts.downloadType || null
@@ -58,18 +79,18 @@ class AdminController extends EditController {
     let menu = 'admin-sidebar'
     if (this.adminGroup) {
       menu = "admin-"+this.adminGroup+'-submenu'
-      admin.addNav(this.adminGroup, "", {subMenu: menu, icon: 'group', order: this.order})
+      admin.addNav(this.adminGroup, "", {subMenu: menu, icon: this.iconClasses.group, order: this.order})
     }
     this._subMenu = this.prefix+'-submenu'
-    nav.add(menu, this.displayName, this.routePrefix, {subMenu: this._subMenu, icon: 'submenu', order: this.order, override: opts.icon})
+    nav.add(menu, this.displayName, this.routePrefix, {subMenu: this._subMenu, icon: this.iconClasses.submenu, order: this.order})
 
-    this.addNav('View', '', {icon: 'view'})
-    this.addNav('Create', 'create', {icon: 'create'})
+    this.addNav('View', '', {icon: this.iconClasses.view})
+    this.addNav('Create', 'create', {icon: this.iconClasses.create})
 
-    this.addAction('list', 'Add', "/create", {icon: 'fa fa-plus'})
-    this.addInstanceAction("Edit", "/edit/", {icon: "fa fa-edit"})
+    this.addAction('list', 'Add', "/create", {icon: this.iconClasses.add})
+    this.addInstanceAction("Edit", "/edit/", {icon: this.iconClasses.edit})
     this.addInstanceAction("Delete", "/delete/", {
-      icon: "fa fa-remove",
+      icon: this.iconClasses.delete,
       template: 'actions-button-post',
       templateMinimal: 'actions-icon-post'
     })
@@ -89,6 +110,8 @@ class AdminController extends EditController {
     }
   }
 
+  
+  
   /**
    * Register an admin nav menu item under this model
    *
@@ -130,9 +153,9 @@ class AdminController extends EditController {
       nav: false,
       directHandler: true
     }, ::this._download)
-    nav.add(this.prefix+'-submenu', 'Download', exportRoute, {icon: 'download'})
+    nav.add(this.prefix+'-submenu', 'Download', exportRoute, {icon: this.iconClasses.download})
     actions.add(this.templatePrefix+"-list", "Download", "/export", {
-      icon: "fa fa-download"
+      icon: this.iconClasses.download
     })
   }
 
@@ -156,9 +179,9 @@ class AdminController extends EditController {
 
     templater.default().template(__dirname+"/templates/admin-import.ejs", this.pageTemplate, this.templatePrefix+"-import")
 
-    nav.add(this.prefix+'-submenu', 'Import', importRoute, {icon: 'upload'})
+    nav.add(this.prefix+'-submenu', 'Import', importRoute, {icon: this.iconClasses.upload})
     actions.add(this.templatePrefix+"-list", "Import", "/import", {
-      icon: "fa fa-upload"
+      icon: this.iconClasses.upload
     })
 
   }
