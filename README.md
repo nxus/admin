@@ -83,7 +83,7 @@ to provide admin prefixes for routes ("/admin/model-identity") and templates ("m
 
 ## Parameters (in addition to EditController parameters)
 
--   `icon` - icon class for nav - defaults to fa-files-o
+-   `icon` - [deprecated] icon class for nav - defaults to fa-files-o
 -   `order` - optional ordering for nav
 -   `uploadType` - dataManager import type (e.g. csv, json), if set an Import action is available.
 -   `uploadOptions` - options to pass to dataManager parser

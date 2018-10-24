@@ -19,7 +19,7 @@ import {application as app} from 'nxus-core'
  * to provide admin prefixes for routes ("/admin/model-identity") and templates ("model-identity-admin"), and by default wraps templates in 'admin-page' rather than 'page'.
  *
  * # Parameters (in addition to EditController parameters)
- *  * `icon` - icon class for nav - defaults to fa-files-o
+ *  * `icon` - [deprecated] icon class for nav - defaults to fa-files-o
  *  * `order` - optional ordering for nav
  *  * `uploadType` - dataManager import type (e.g. csv, json), if set an Import action is available.
  *  * `uploadOptions` - options to pass to dataManager parser
@@ -27,6 +27,7 @@ import {application as app} from 'nxus-core'
 
 
 class AdminController extends EditController {
+  
   constructor(opts) {
     let _modelIdentity = opts.model || opts.modelIdentity || morph.toDashed(new.target.name)
     opts.modelIdentity = _modelIdentity
@@ -42,7 +43,6 @@ class AdminController extends EditController {
     super(opts)
 
     this.displayName = opts.displayName || morph.toTitle(this.modelIdentity)
-    this.icon = opts.icon || 'fa fa-files-o'
     this.order = opts.order || 0
 
     this.uploadOptions = opts.uploadOptions || {}
@@ -54,23 +54,25 @@ class AdminController extends EditController {
       this.adminGroup = morph.toTitle(_modelIdentity.split('-')[0])
     }
 
+    if (opts.icon) this.log.warn('icon option is deprecated')
+
     if(this.routePrefix[0] != '/') this.routePrefix = '/'+this.routePrefix
 
     let menu = 'admin-sidebar'
     if (this.adminGroup) {
       menu = "admin-"+this.adminGroup+'-submenu'
-      admin.addNav(this.adminGroup, "", {subMenu: menu, icon: 'fa fa-folder-open-o', order: this.order})
+      admin.addNav(this.adminGroup, "", {subMenu: menu, icon: 'group', order: this.order})
     }
     this._subMenu = this.prefix+'-submenu'
-    nav.add(menu, this.displayName, this.routePrefix, {subMenu: this._subMenu, icon: this.icon, order: this.order})
+    nav.add(menu, this.displayName, this.routePrefix, {subMenu: this._subMenu, icon: 'submenu', order: this.order, override: opts.icon})
 
-    this.addNav('View', '', {icon: 'fa fa-list'})
-    this.addNav('Create', 'create', {icon: 'fa fa-plus'})
+    this.addNav('View', '', {icon: 'view'})
+    this.addNav('Create', 'create', {icon: 'create'})
 
-    this.addAction('list', 'Add', "/create", {icon: 'fa fa-plus'})
-    this.addInstanceAction("Edit", "/edit/", {icon: "fa fa-edit"})
+    this.addAction('list', 'Add', "/create", {icon: 'add'})
+    this.addInstanceAction("Edit", "/edit/", {icon: 'edit'})
     this.addInstanceAction("Delete", "/delete/", {
-      icon: "fa fa-remove",
+      icon: 'delete',
       template: 'actions-button-post',
       templateMinimal: 'actions-icon-post'
     })
@@ -90,6 +92,8 @@ class AdminController extends EditController {
     }
   }
 
+  
+  
   /**
    * Register an admin nav menu item under this model
    *
@@ -131,9 +135,9 @@ class AdminController extends EditController {
       nav: false,
       directHandler: true
     }, ::this._download)
-    nav.add(this.prefix+'-submenu', 'Download', exportRoute, {icon: 'fa fa-download'})
+    nav.add(this.prefix+'-submenu', 'Download', exportRoute, {icon: 'download'})
     actions.add(this.templatePrefix+"-list", "Download", "/export", {
-      icon: "fa fa-download"
+      icon: 'download'
     })
   }
 
@@ -157,9 +161,9 @@ class AdminController extends EditController {
 
     templater.default().template(__dirname+"/templates/admin-import.ejs", this.pageTemplate, this.templatePrefix+"-import")
 
-    nav.add(this.prefix+'-submenu', 'Import', importRoute, {icon: 'fa fa-upload'})
+    nav.add(this.prefix+'-submenu', 'Import', importRoute, {icon: 'upload'})
     actions.add(this.templatePrefix+"-list", "Import", "/import", {
-      icon: "fa fa-upload"
+      icon: 'upload'
     })
 
   }
