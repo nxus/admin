@@ -69,10 +69,10 @@ class AdminController extends EditController {
     this.addNav('View', '', {icon: 'view'})
     this.addNav('Create', 'create', {icon: 'create'})
 
-    this.addAction('list', 'Add', "/create", {icon: 'add'})
-    this.addInstanceAction("Edit", "/edit/", {icon: 'edit'})
+    this.addAction('list', 'Add', "/create", {icon: 'fa fa-plus'})
+    this.addInstanceAction("Edit", "/edit/", {icon: 'fa fa-edit'})
     this.addInstanceAction("Delete", "/delete/", {
-      icon: 'delete',
+      icon: 'fa fa-remove',
       template: 'actions-button-post',
       templateMinimal: 'actions-icon-post'
     })
@@ -137,7 +137,7 @@ class AdminController extends EditController {
     }, ::this._download)
     nav.add(this.prefix+'-submenu', 'Download', exportRoute, {icon: 'download'})
     actions.add(this.templatePrefix+"-list", "Download", "/export", {
-      icon: 'download'
+      icon: 'fa fa-download'
     })
   }
 
@@ -163,7 +163,7 @@ class AdminController extends EditController {
 
     nav.add(this.prefix+'-submenu', 'Import', importRoute, {icon: 'upload'})
     actions.add(this.templatePrefix+"-list", "Import", "/import", {
-      icon: 'upload'
+      icon: 'fa fa-upload'
     })
 
   }
