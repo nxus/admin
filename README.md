@@ -10,7 +10,7 @@ The Base Admin class provides a web interface for managing Nxus applications and
 
 #### getAdminUrl
 
-Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the root Url where the admin interface is available.
+Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** the root Url where the admin interface is available.
 
 #### page
 
@@ -42,8 +42,8 @@ Other options include:
 
 **Parameters**
 
--   `opts` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object))** The route or options for the page
--   `responder` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function))** The string partial name or handler function for the route
+-   `opts` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object))** The route or options for the page
+-   `responder` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function))** The string partial name or handler function for the route
 
 #### help
 
@@ -51,9 +51,9 @@ Registers help text for the admin interface.
 
 **Parameters**
 
--   `section` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The nav section
--   `welcome` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The template partial name to render as welcome and help
--   `detail` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** An additional partial to render on the help detail
+-   `section` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** The nav section
+-   `welcome` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** The template partial name to render as welcome and help
+-   `detail` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** An additional partial to render on the help detail
 
 #### addNav
 
@@ -61,9 +61,9 @@ Register an admin nav menu item, wraps web-nav for relative URls and menu name
 
 **Parameters**
 
--   `label` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Label for nav item
--   `route` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Either a relative (joined with adminUrl) or absolute URL to link to
--   `opts` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** nav menu options for web-nav, e.g. icon, order (optional, default `{}`)
+-   `label` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Label for nav item
+-   `route` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Either a relative (joined with adminUrl) or absolute URL to link to
+-   `opts` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** nav menu options for web-nav, e.g. icon, order (optional, default `{}`)
 
 #### manage
 
@@ -72,7 +72,7 @@ Create an AdminController for a given model. Takes either the model identity, or
 
 **Parameters**
 
--   `opts` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object))** The model identity or options object. (optional, default `{}`)
+-   `opts` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object))** The model identity or options object. (optional, default `{}`)
 
 ### AdminController
 
@@ -98,9 +98,9 @@ Register an admin nav menu item under this model
 
 **Parameters**
 
--   `label` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Label for nav item
--   `route` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Either a relative (joined with adminUrl) or absolute URL to link to
--   `opts` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** nav menu options for web-nav, e.g. icon, order (optional, default `{}`)
+-   `label` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Label for nav item
+-   `route` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Either a relative (joined with adminUrl) or absolute URL to link to
+-   `opts` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** nav menu options for web-nav, e.g. icon, order (optional, default `{}`)
 
 #### addAction
 
@@ -108,10 +108,10 @@ Register an admin action item for this model, wrapping web-actions
 
 **Parameters**
 
--   `page` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Template suffix: 'list', 'edit', 'create', 'detail'
--   `label` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Label for action
--   `route` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Sub-route for action
--   `opts` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** options for web-actions, e.g. icon, template (optional, default `{}`)
+-   `page` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Template suffix: 'list', 'edit', 'create', 'detail'
+-   `label` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Label for action
+-   `route` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Sub-route for action
+-   `opts` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** options for web-actions, e.g. icon, template (optional, default `{}`)
 
 #### addInstanceAction
 
@@ -119,9 +119,9 @@ Register an admin instance action item for this model's list page, wrapping web-
 
 **Parameters**
 
--   `label` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Label for action
--   `route` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Sub-route for action
--   `opts` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** options for web-actions, e.g. icon, template (optional, default `{}`)
+-   `label` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Label for action
+-   `route` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Sub-route for action
+-   `opts` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** options for web-actions, e.g. icon, template (optional, default `{}`)
 
 #### \_formatDownloadRecord
 
@@ -129,7 +129,7 @@ Override in subclass to do additional formatting of records for download
 
 **Parameters**
 
--   `record` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+-   `record` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 -   `attrs`  
 
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** formatted record
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** formatted record
