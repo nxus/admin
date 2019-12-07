@@ -23,11 +23,12 @@ import {application as app} from 'nxus-core'
  *  * `order` - optional ordering for nav
  *  * `uploadType` - dataManager import type (e.g. csv, json), if set an Import action is available.
  *  * `uploadOptions` - options to pass to dataManager parser
+ *  * `downloadType` - dataManager download type. If set, a Download action is available.
  */
 
 
 class AdminController extends EditController {
-  
+
   constructor(opts) {
     let _modelIdentity = opts.model || opts.modelIdentity || morph.toDashed(new.target.name)
     opts.modelIdentity = _modelIdentity
@@ -92,8 +93,8 @@ class AdminController extends EditController {
     }
   }
 
-  
-  
+
+
   /**
    * Register an admin nav menu item under this model
    *
