@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/nxus/admin",
   "dependencies": {
+    "babel-plugin-transform-function-bind": "^6.22.0",
     "bluebird": "^3.0.6",
     "moment": "^2.17.1",
     "morph": "^0.2.0",
