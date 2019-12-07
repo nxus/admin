@@ -38,7 +38,7 @@
     "nxus-router": "^4.0.0",
     "nxus-templater": "^4.0.0",
     "nxus-users": "^4.0.1",
-    "nxus-web": "^4.1.0-0",
+    "nxus-web": "^4.2.0-0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
