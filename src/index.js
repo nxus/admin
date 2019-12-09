@@ -12,6 +12,8 @@ import url from 'url'
 import _ from 'underscore'
 import morph from 'morph'
 
+
+
 /**
  * The Base Admin class provides a web interface for managing Nxus applications and data.
  */
@@ -178,7 +180,7 @@ class Admin extends NxusModule {
     if(_.isString(opts)) opts = {model: opts}
     if(!opts.model) throw new Error('Admin.manage must be called with a model attribute or string name')
     if(opts.dataTables)
-      new DataTablesMixin(AdminController)(opts)
+      new AdminControllerWithDataTables(opts)
     else
       new AdminController(opts)
   }
@@ -186,4 +188,9 @@ class Admin extends NxusModule {
 
 var admin = Admin.getProxy()
 import AdminController from './AdminController'
+class AdminControllerWithDataTables extends DataTablesMixin(AdminController) {
+  constructor(opts) {
+    super(opts)
+  }
+}
 export {Admin as default, admin, AdminController}
