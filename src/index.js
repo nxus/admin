@@ -4,13 +4,15 @@ import Promise from 'bluebird'
 import {NxusModule} from 'nxus-core'
 import {router} from 'nxus-router'
 import {templater} from 'nxus-templater'
-import {nav} from 'nxus-web'
+import {nav, DataTablesMixin} from 'nxus-web'
 import {application as app} from 'nxus-core'
 import {users} from 'nxus-users'
 import url from 'url'
 
 import _ from 'underscore'
 import morph from 'morph'
+
+
 
 /**
  * The Base Admin class provides a web interface for managing Nxus applications and data.
@@ -116,7 +118,7 @@ class Admin extends NxusModule {
   help(section, welcome, detail) {
     this._help[section] = {welcome, detail}
   }
-  
+
   _addNav(label, route, opts) {
     nav.add('admin-sidebar', label, route, opts)
   }
@@ -177,11 +179,18 @@ class Admin extends NxusModule {
   manage(opts = {}) {
     if(_.isString(opts)) opts = {model: opts}
     if(!opts.model) throw new Error('Admin.manage must be called with a model attribute or string name')
-    new AdminController(opts)
+    if(opts.dataTables)
+      new AdminControllerWithDataTables(opts)
+    else
+      new AdminController(opts)
   }
 }
 
 var admin = Admin.getProxy()
 import AdminController from './AdminController'
+class AdminControllerWithDataTables extends DataTablesMixin(AdminController) {
+  constructor(opts) {
+    super(opts)
+  }
+}
 export {Admin as default, admin, AdminController}
-
