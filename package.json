@@ -42,7 +42,7 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "documentation": "^4.0.0-beta9",
+    "documentation": "^14.0.0",
     "chai": "^3.4.1",
     "chai-as-promised": "^5.1.0",
     "mocha": "^2.2.5",
